@@ -45,8 +45,14 @@ body {
     height: 60px;
     margin-right: 10px;
 }
+.keysContainer{
+
+}
+
 .key{
-    
+border: black;
+border-style: solid;
+border-radius: 2px;
 }
 
 
