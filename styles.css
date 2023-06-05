@@ -1,9 +1,10 @@
 body {
-    background-color: #EAC5D6;
+    background-color: #7936FF;
     display: flex;
     flex-direction: column;
     justify-content: center;
     font-family: 'Roboto', sans-serif;
+    color: #E8E00E;
     
 }
 .calcBody {
@@ -16,6 +17,8 @@ body {
     border-style: solid;
     border-radius: 6px;
     align-self: center;
+    margin-bottom: 10px;
+    background-color: #E8E00E;
 }
 
 .screen{
@@ -24,6 +27,7 @@ body {
     border-style: solid;
     border-radius: 4px;
     height: 100px;
+    background-color: #FCFCFC;
 }
 .clearDeleteContainer{
     display: flex;
@@ -36,6 +40,9 @@ body {
     border-radius: 4px;
     height: 60px;
     margin-left: 10px;
+    background-color: #DB4C18;
+    font-weight: 500px;
+    font-size: 20px;
 }
 .delete{
     width: 165px;
@@ -44,15 +51,31 @@ body {
     border-radius: 4px;
     height: 60px;
     margin-right: 10px;
+    background-color: #18DBB4;
+    font-weight: 500px;
+    font-size: 20px;
 }
 .keysContainer{
-
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(4, auto);
+    column-gap: 6px;
+    margin-top: 15px;
+    margin-right: 27px;
+    margin-left: 27px;
+    margin-bottom: 10px;
+    row-gap: 6px;
 }
 
 .key{
 border: black;
 border-style: solid;
-border-radius: 2px;
+border-radius: 4px;
+height: 78px;
+background-color: #8636FF;
+color: #E8E00E;
+font-weight: 500px;
+font-size: 20px;
 }
 
 
