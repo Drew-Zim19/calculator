@@ -6,36 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Drew's Calculator</title>
     <link rel = "stylesheet" href = "./styles.css" type="text/css" />
-    <script src = "calc.js"></script>
+    <script src = "calc.js" defer></script>
 </head>
 <body>
 <div class="calcBody">
-        <div class="screen">
-
+        <div class="screenContainer">
+            <p class="screen">0</p>
         </div>
         <div class= "clearDeleteContainer">
-            <button class="clear">Clear</button>
-            <button class ="delete">Delete </button>
+            <button class="clear" id="cleared">Clear</button>
+            <button class ="delete" id="backspace">Delete </button>
         </div>
 
        
         <div class="keysContainer">
-            <button class="key">7</button>
-            <button class="key">8</button>
-            <button class="key">9</button>
-            <button class="key">/</button>
-            <button class="key">4</button>
-            <button class="key">5</button>
-            <button class="key">6</button>
-            <button class="key">x</button>
-            <button class="key">1</button>
-            <button class="key">2</button>
-            <button class="key">3</button>
-            <button class="key">-</button>
-            <button class="key">.</button>
-            <button class="key">0</button>
-            <button class="key">=</button>
-            <button class="key">+</button>
+            <button class="key" id="seven">7</button>
+            <button class="key" id="eight">8</button>
+            <button class="key" id="nine">9</button>
+            <button class="key" id="divide">/</button>
+            <button class="key" id="four">4</button>
+            <button class="key" id="five">5</button>
+            <button class="key" id="six">6</button>
+            <button class="key" id="multiply">x</button>
+            <button class="key" id="one">1</button>
+            <button class="key" id="two">2</button>
+            <button class="key" id="three">3</button>
+            <button class="key" id="minus">-</button>
+            <button class="key" id="point">.</button>
+            <button class="key" id="zero">0</button>
+            <button class="key" id="equals">=</button>
+            <button class="key" id="add">+</button>
         </div>
 </div>
    

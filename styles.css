@@ -21,13 +21,21 @@ body {
     background-color: #E8E00E;
 }
 
-.screen{
+.screenContainer{
     margin: 25px;
     border: black;
     border-style: solid;
     border-radius: 4px;
     height: 100px;
     background-color: #FCFCFC;
+    font-size: 30px;
+    text-align: right;
+    vertical-align: text-bottom;
+}
+.screen{
+    font-size: 30px;
+    text-align: right;
+    margin-right: 10px;
 }
 .clearDeleteContainer{
     display: flex;
@@ -77,25 +85,6 @@ color: #E8E00E;
 font-weight: 500px;
 font-size: 20px;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 .footerContainer{
     display: flex;
