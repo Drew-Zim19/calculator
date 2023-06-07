@@ -20,6 +20,8 @@ let operator = ''
 let displayResult = [];
 let firstValue = 0;
 let isOperatorClicked = false;
+let isEqualsClicked = false;
+let decimalCount = 0;
 const screenDisplay = document.querySelector('.screen');
 
 //basic math operations functions
@@ -37,6 +39,10 @@ function multiply(num1, num2){
 
 function divide(num1, num2){
     let result = num1 / num2;
+    let error = 'Divide by 0 Err';
+    if(num2 ===0){
+        return error;
+    }
     result = Math.round(result * 10000000) / 10000000
     return result;
 }
@@ -98,8 +104,28 @@ document.getElementById('multiply').addEventListener("click", () => {
 });
 
 function inputNumber(number) {
-    displayResult.push(number);
+    let number1 = number;
+    if(number1 === '.' && decimalCount < 1)
+    {
+        decimalCount = decimalCount + 1;
+        displayResult.push(number1);
+        document.querySelector('.screen').innerHTML = displayResult.join("");
+    }
+    if(number1 === '.' && isOperatorClicked === true && decimalCount < 2){
+        decimalCount++;
+        displayResult.push(number1);
+        document.querySelector('.screen').innerHTML = displayResult.join("");
+    }
+    if(number1 === '.'){
+        return;
+    }
+    if(number1 === 0 && displayResult.indexOf('.') === -1){
+        return;
+    }
+    else{
+    displayResult.push(number1);
     document.querySelector('.screen').innerHTML = displayResult.join("");
+    }
 }
 
 //equals button, fires only when 2 numbers and an operator is supplied
@@ -109,27 +135,75 @@ document.getElementById('equals').addEventListener("click", () => {
         let copyArray = displayResult;
         toNum(copyArray);
         let finalResult = operate(operator, num1, num2);
-        console.log(finalResult);
+        displayResult.length = 0;
+        displayResult[0] = finalResult;
+        document.querySelector('.screen').innerHTML = displayResult;
+       
+        if(!finalResult.isInteger){
+            decimalCount = 1;
+            displayResult.length = 0;
+            displayResult[0] = finalResult;
+            isEqualsClicked = true
+            isOperatorClicked = false;
+        }
+        else{
+        displayResult.length = 0;
+        displayResult[0] = finalResult;
+        isEqualsClicked = true
+        isOperatorClicked = false;
+        decimalCount = 0;
+        }
     }
-
+    isEqualsClicked = false;
+    console.log(displayResult);
 });
 
 //function to convert the array of numbers and operators to 2 numbers for calculations
 
 function toNum(array){
-    array = array.map(array => +array);
+    let string =  array.join("");
+    let num1Array = [];
+    let num2Array = [];
     let operatorIndex = 0;
-
-    //logic to find index of NaN which is the operator
-
-    operatorIndex = array.findIndex(operatorIndex => Number.isNaN(operatorIndex));
-    
-    //remove the NaN then join the remaining numbers into 2 nums
-
-    array.splice(operatorIndex, 1);
-    num2Array = array.splice(0, operatorIndex);
-    num2 = Number(array.join(""));
-    num1 = Number(num2Array.join(""));
+    if(operator === 'add'){
+        operatorIndex = string.indexOf('+');
+        //first num, split string to not include operator
+        for(let i = 0; i < operatorIndex; i++){
+            num1Array[i] = string[i];
+        }
+        for(let i = operatorIndex + 1; i < string.length; i++){
+            num2Array[i] = string[i];
+        }
+    }
+    if(operator === 'minus'){
+        operatorIndex = string.indexOf('-');
+        for(let i = 0; i < operatorIndex; i++){
+            num1Array[i] = string[i];
+        }
+        for(let i = operatorIndex + 1; i < string.length; i++){
+            num2Array[i] = string[i];
+        }
+    }
+    if(operator ==='multiply'){
+        operatorIndex = string.indexOf('x');
+        for(let i = 0; i < operatorIndex; i++){
+            num1Array[i] = string[i];
+        }
+        for(let i = operatorIndex + 1; i < string.length; i++){
+            num2Array[i] = string[i];
+        }
+    }
+    if(operator ==='divide'){
+        operatorIndex = string.indexOf('/');
+        for(let i = 0; i < operatorIndex; i++){
+            num1Array[i] = string[i];
+        }
+        for(let i = operatorIndex + 1; i < string.length; i++){
+            num2Array[i] = string[i];
+        }
+    }
+    num1 = Number(num1Array.join(""));
+    num2 = Number(num2Array.join(""));
 }
 
 document.getElementById('seven').addEventListener("click", () => {
@@ -180,20 +254,28 @@ document.getElementById('zero').addEventListener("click", () => {
     inputNumber(0)
 
 });
+document.getElementById('point').addEventListener("click", () => {
+    inputNumber('.')
+
+});
 
 document.getElementById('cleared').addEventListener("click", () => {
     document.querySelector('.screen').innerHTML = 0;
     displayResult.length = 0;
+    isOperatorClicked = false;
+    isEqualsClicked = false;
+    decimalCount = 0;
 });
 
 document.getElementById('backspace').addEventListener("click", () => {
     if(displayResult.length > 0){
         let char = displayResult.splice(displayResult.length - 1, 1).join("");
-        console.log(char);
+
         //check to make sure backspace wasnt an operator. if it was, change operator clicked to false
 
-        if(char === '-' || char === '+' || char === '/' || char === 'x'){
+        if(char === '-' || char === '+' || char === '/' || char === 'x' || char === '.'){
             isOperatorClicked = false;
+            decimalCount = decimalCount - 1;
         }
 
         document.querySelector('.screen').innerHTML = displayResult.join("");
